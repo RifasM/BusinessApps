@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import urllib
 from pathlib import Path
 import os
 
@@ -76,9 +76,23 @@ WSGI_APPLICATION = 'BusinessApps.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "NAME": "businessApps",
+        "ENGINE": "djongo",
+        "ENFORCE_SCHEMA": False,
+        "CLIENT": {
+            "host":
+            "mongodb+srv://" + os.getenv("MONGO_USER") + ":" +
+            urllib.parse.quote_plus(os.getenv("MONGO_PASSWORD")) +
+            "@projects.jdtnw.gcp.mongodb.net/businessApps"
+            "?retryWrites=true&w=majority",
+            "username":
+            os.getenv("MONGO_USER"),
+            "password":
+            os.getenv("MONGO_PASSWORD"),
+            "authMechanism":
+            "SCRAM-SHA-1",
+        },
     }
 }
 

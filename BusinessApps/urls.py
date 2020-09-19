@@ -20,4 +20,6 @@ from BusinessApps import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", views.index, name="index_page"),
+    path("create_invoice", views.create_invoice, name="create_invoice"),
+    path("create_quotation", views.create_quotation, name="create_quotation"),
 ]
