@@ -10,16 +10,6 @@ def index(request):
     return render(request, "index.html")
 
 
-def create_invoice(request):
-    """
-    Return and process Requests involving
-    Creation of Invoices
-    :param request: User Request (Get and Post)
-    :return: Creation Page on GET, Display Invoice on POST
-    """
-    pass
-
-
 def create_quotation(request):
     """
     Return and process Requests involving
