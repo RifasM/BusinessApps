@@ -8,7 +8,7 @@ def landing(request):
     :param request: User Request (Get and Post)
     :return: Creation Page on GET, Display Invoice on POST
     """
-    return render(request, "invoice_landing.html")
+    return render(request, "invoice/invoice_landing.html")
 
 
 def create(request):
