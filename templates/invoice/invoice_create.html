@@ -68,12 +68,98 @@
       <div class="center-text">
         <h1>M R Interiors</h1>
           <div class="row">
-            <div class="col-md-4">
-              <h3 class="lead">Create New Invoice</h3>
-            </div>
-            {{ form }}
+              {% if initial_data %}
+                  {{ initial_data }}
+              <div class="col-md-8">
+                <table class="table table-sm table-dark">
+                  <tbody>
+                    <tr>
+                      <th scope="row">Reference Number</th>
+                      <td>{{ initial_data.reference_number }}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Reference Date</th>
+                      <td>{{ initial_data.reference_date }}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Addressed To</th>
+                      <td>{{ initial_data.addressed_to }}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Party GST</th>
+                      <td>{{ initial_data.party_gst }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              {% endif %}
           </div>
       </div>
+
+      {% if prev_data %}
+          <table class="table table-sm table-dark">
+              <thead>
+                <tr>
+                  <th scope="col">Item Number</th>
+                  <th scope="col">Short Description</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Unit</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for d in prev_data %}
+                <tr>
+                  <th scope="row">{{ forloop.counter }}</th>
+                  <td>{{ d.short_description }}</td>
+                  <td>{{ d.particulars }}</td>
+                  <td>{{ d.quantity }}</td>
+                  <td>{{ d.unit }}</td>
+                  <td>{{ d.unit_price }}</td>
+                  <td>{{ d.total }}</td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+      {% endif %}
+
+        <form class="row" id="main-form" method="post" action="{% url 'invoice:create' %}">
+            {% csrf_token %}
+            <div class="col-md-5">
+                {% if initial_data %}
+                    <input type="hidden" value="{{ initial_data }}" id="initial_data" name="initial_data">
+                {% endif %}
+                {% if prev_data %}
+                    <input type="hidden" value="{{ prev_data }}" id="prev_data" name="prev_data">
+                {% endif %}
+                {{ form }}
+            </div>
+            {% if stage == "1" %}
+                <div class="col-md-5">
+                    <input type="submit" class="btn btn-outline-info" value="Continue">
+                </div>
+            {% elif stage == "2" %}
+                <div class="col-md-5">
+                    <a href="javascript:Add()" class="btn btn-outline-info">Add Another Item</a>
+                    <a href="javascript:save()" class="btn btn-outline-info">Save and Print</a>
+                </div>
+                <script>
+                    function Add(){
+                        let form_data = document.getElementById("main-form");
+                        form_data.setAttribute("action", "{% url 'invoice:save_add' %}");
+                        form_data.submit();
+                    }
+
+                    function save(){
+                        let form_data = document.getElementById("main-form");
+                        form_data.setAttribute("action", "{% url 'invoice:create' %}");
+                        form_data.submit();
+                    }
+                </script>
+            {% endif %}
+        </form>
 
     </main><!-- /.container -->
 

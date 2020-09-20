@@ -1,28 +1,24 @@
 from django import forms
 
-from invoice.models import Invoice, unit_choices
+from invoice.models import unit_choices
 
 
-class InvoiceForm(forms.Form):
-    invoice_number = forms.IntegerField(
-        widget=forms.NumberInput(
-            attrs={
-                "class": "form-control",
-                "placeholder": "Invoice Number",
-            })
-    )
+class InitialInvoice(forms.Form):
     reference_number = forms.CharField(
         widget=forms.TextInput(
             attrs={
                 "class": "form-control",
-                "placeholder": "Reference Number"
+                "placeholder": "PO/Reference Number"
             }),
         required=True
     )
-    reference_date = forms.DateInput(
-        attrs={
-            "class": "form-control"
-        }
+    reference_date = forms.DateField(
+        widget=forms.SelectDateWidget(
+            attrs={
+                "class": "form-control"
+            }
+        ),
+        required=True
     )
     addressed_to = forms.CharField(
         widget=forms.Textarea(
@@ -42,6 +38,9 @@ class InvoiceForm(forms.Form):
         ),
         required=True
     )
+
+
+class ItemForm(forms.Form):
     short_description = forms.CharField(
         widget=forms.TextInput(
             attrs={
@@ -77,6 +76,15 @@ class InvoiceForm(forms.Form):
         choices=unit_choices,
         required=True
     )
+    unit_price = forms.IntegerField(
+        widget=forms.NumberInput(
+            attrs={
+                "class": "form-control",
+                "placeholder": "Unit Price"
+            }
+        ),
+        required=True
+    )
     total = forms.IntegerField(
         widget=forms.NumberInput(
             attrs={
@@ -84,7 +92,17 @@ class InvoiceForm(forms.Form):
                 "placeholder": "Total"
             }
         ),
-        required=True
+        required=False
+    )
+
+
+class InvoiceForm(forms.Form):
+    invoice_number = forms.IntegerField(
+        widget=forms.NumberInput(
+            attrs={
+                "class": "form-control",
+                "placeholder": "Invoice Number",
+            })
     )
     s_gst = forms.IntegerField(
         widget=forms.NumberInput(
@@ -121,17 +139,3 @@ class InvoiceForm(forms.Form):
             }),
         required=True
     )
-
-    class Meta:
-        model = Invoice
-        fields = ("invoice_date",
-                  "reference_number",
-                  "reference_date",
-                  "addressed_to",
-                  "party_gst",
-                  "notes",
-                  "items",
-                  "s_gst",
-                  "c_gst",
-                  "other_charges",
-                  "total")
