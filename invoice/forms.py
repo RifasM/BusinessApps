@@ -4,6 +4,14 @@ from invoice.models import unit_choices
 
 
 class InitialInvoice(forms.Form):
+    invoice_date = forms.DateField(
+        widget=forms.SelectDateWidget(
+            attrs={
+                "class": "form-control"
+            }
+        ),
+        required=True
+    )
     reference_number = forms.CharField(
         widget=forms.TextInput(
             attrs={
@@ -85,15 +93,6 @@ class ItemForm(forms.Form):
         ),
         required=True
     )
-    total = forms.IntegerField(
-        widget=forms.NumberInput(
-            attrs={
-                "class": "form-control",
-                "placeholder": "Total"
-            }
-        ),
-        required=False
-    )
 
 
 class InvoiceForm(forms.Form):
@@ -131,14 +130,6 @@ class InvoiceForm(forms.Form):
             }),
         required=True,
         initial=0
-    )
-    grand_total = forms.IntegerField(
-        widget=forms.NumberInput(
-            attrs={
-                "class": "form-control",
-                "placeholder": "Grand Total",
-            }),
-        required=True
     )
     additional_notes = forms.CharField(
         widget=forms.TextInput(

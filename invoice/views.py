@@ -1,4 +1,5 @@
 import json
+import re
 
 from django.shortcuts import render
 from django.utils.datastructures import MultiValueDictKeyError
@@ -51,6 +52,11 @@ def process_request(request):
     :return: Processed initial_data and data
     """
     initial_data = request.POST["initial_data"]
+    if not re.search("'datetime.date\\((.*?)\\)'", initial_data):
+        date_val = re.search("datetime.date\\((.*?)\\)", initial_data).group(1)
+        initial_data = re.sub("datetime.date\\((.*?)\\)", "'datetime.date(" + date_val + ")'", initial_data)
+    initial_data = json.loads(initial_data.replace("'", "\""))
+
     old_data = json.loads(request.POST["prev_data"].replace("'", "\"")) if "prev_data" in request.POST else None
     data = []
     try:
@@ -116,17 +122,23 @@ def save_print(request):
     if request.method == "POST":
         initial_data, data = process_request(request)
         tax_data = {
-            "invoice_number": request.POST["invoice_number"],
             "s_gst": request.POST["s_gst"],
             "c_gst": request.POST["c_gst"],
             "other_charges": request.POST["other_charges"],
-            "grand_total": request.POST["grand_total"],
             "additional_notes": request.POST["additional_notes"]
         }
 
-        if request.POST["invoice_number"] is not "" \
+        if request.POST["invoice_number"] == "":
+            inv_num = Invoice.objects.order_by("number").first()
+
+            if inv_num is None:
+                inv_num = 1
+            else:
+                inv_num += 1
+
+        elif request.POST["invoice_number"] != "" \
                 and \
-                Invoice.objects.get(pk=tax_data.get("invoice_number")) is not None:
+                Invoice.objects.filter(number=request.POST["invoice_number"]).exists():
             error = "Error, Invoice number Exists"
             return render(request,
                           "invoice/invoice_create.html",
@@ -137,9 +149,41 @@ def save_print(request):
                               "initial_data": initial_data,
                               "error": error
                           })
+        else:
+            inv_num = request.POST["invoice_number"]
 
-        print(initial_data, data)
-        pass
+        sub_total = sum([float(a.get("total")) for a in data])
+        grand_total = sub_total + ((float(request.POST["s_gst"]) +
+                                    float(request.POST["c_gst"])) / 100) * sub_total
+
+        print(initial_data, type(initial_data))
+        return render(request,
+                      "invoice/invoice_preview.html",
+                      {
+                          "invoice_number": inv_num,
+                          "initial_data": initial_data,
+                          "prev_data": data,
+                          "sub_total": sub_total,
+                          "tax_data": tax_data,
+                          "grand_total": grand_total
+                      })
+
+
+def save(request):
+    """
+    View to save and print Invoice
+    :param request: User Request (POST)
+    :return: Return Printable view
+    """
+    inv_num = request.POST["invoice_number"]
+    initial_data, data = process_request(request)
+    tax_data = json.loads(request.POST["tax_data"].replace("'", "\""))
+    sub_total = request.POST["sub_total"]
+    s_gst = request.POST["s_gst"]
+    s_gst_val = float(sub_total) * (float(s_gst) / 100)
+    c_gst = request.POST["c_gst"]
+    c_gst_val = float(sub_total) * (float(c_gst) / 100)
+    grand_total = request.POST["grand_total"]
 
 
 def modify(request):

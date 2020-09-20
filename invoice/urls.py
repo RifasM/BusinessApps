@@ -10,5 +10,6 @@ urlpatterns = [
     path("saveAdd/", views.save_add, name="save_add"),
     path("saveTax/", views.save_tax, name="save_tax"),
     path("savePrint/", views.save_print, name="save_print"),
+    path("save/", views.save, name="save"),
     path("modify/", views.modify, name="modify"),
 ]

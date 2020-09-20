@@ -1,8 +1,8 @@
 from djongo import models
 
-unit_choices = (("sq_mtr", "Sq. Mtr"),
-                ("sq_ft", "Sq. Ft"),
-                ("unit", "Unit(s)"))
+unit_choices = (("Sq. Mtr", "Sq. Mtr"),
+                ("Sq. Ft", "Sq. Ft"),
+                ("Unit(s)", "Unit(s)"))
 
 
 class Item(models.Model):

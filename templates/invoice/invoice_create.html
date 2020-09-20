@@ -64,23 +64,27 @@
 
     <main role="main" class="container">
 
-      <div class="center-text">
-        <h1>M R Interiors</h1>
-          <div class="row">
-              {% if initial_data %}
-              <div class="col-md-8">
-                <table class="table table-sm table-dark">
-                  <tbody>
-                    <tr>
-                      <th scope="row">Reference Number</th>
-                      <td>{{ initial_data.reference_number }}</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Reference Date</th>
-                      <td>{{ initial_data.reference_date }}</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Addressed To</th>
+        <div class="center-text">
+            <h1>M R Interiors</h1>
+            <div class="row">
+                {% if initial_data %}
+                    <div class="col-md-8">
+                        <table class="table table-sm table-dark">
+                            <tbody>
+                            <tr>
+                                <th scope="row">Invoice Date</th>
+                                <td>{{ initial_data.invoice_date }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Reference Number</th>
+                                <td>{{ initial_data.reference_number }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Reference Date</th>
+                                <td>{{ initial_data.reference_date }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Addressed To</th>
                       <td>{{ initial_data.addressed_to }}</td>
                     </tr>
                     <tr>
@@ -166,7 +170,7 @@
                     form_data = document.getElementById("main-form").setAttribute("action", "{% url 'invoice:save_print' %}");
                 </script>
                 <div class="col-md-5">
-                    <input type="submit" class="btn btn-outline-info" value="Save and Print">
+                    <input type="submit" class="btn btn-outline-info" value="Preview">
                 </div>
             {% endif %}
         </form>
