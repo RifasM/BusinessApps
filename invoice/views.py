@@ -54,12 +54,12 @@ def process_request(request):
     """
     initial_data = request.POST["initial_data"]
     if re.search("datetime.date\\((.*?)\\)", initial_data):
-        date_val = re.search("datetime.date\\((.*?)\\)", initial_data).group(1)
-        dates = list(map(int, date_val.split(", ")))
-        print(dates)
-        initial_data = re.sub("datetime.date\\((.*?)\\)",
-                              "'" + datetime.date(dates[0], dates[1], dates[2]).strftime("%d %B, %Y") + "'",
-                              initial_data)
+        date_val = re.findall("datetime.date\\((.*?)\\)", initial_data)
+        for date in date_val:
+            dates = list(map(int, date.split(", ")))
+            initial_data = re.sub("datetime.date\\((.*?)\\)",
+                                  "'" + datetime.date(dates[0], dates[1], dates[2]).strftime("%d %B, %Y") + "'",
+                                  initial_data, 1)
     initial_data = json.loads(initial_data.replace("'", "\""))
 
     old_data = json.loads(request.POST["prev_data"].replace("'", "\"")) if "prev_data" in request.POST else None
