@@ -216,7 +216,7 @@
                     </div>
                     <div class="col invoice-details">
                         <h1 class="invoice-id">INVOICE {{ invoice_number }}</h1>
-                        <div class="date">Date of Invoice: {{ invoice_date }}</div>
+                        <div class="date">Date of Invoice: {{ initial_data.invoice_date }}</div>
                         <div class="date">Reference Number/PO: {{ initial_data.reference_number }}</div>
                         <div class="date">Reference Dated: {{ initial_data.reference_date }}</div>
                     </div>
@@ -242,7 +242,7 @@
                                 <br>
                                 {{ d.particulars }}
                             </td>
-                            <td class="qty">{{ d.quantity }}/td>
+                            <td class="qty">{{ d.quantity }}</td>
                             <td class="unit">{{ d.unit }}</td>
                             <td class="qty">{{ d.unit_price }}</td>
                             <td class="total">₹ {{ d.total }}</td>
@@ -251,27 +251,27 @@
                     </tbody>
                     <tfoot>
                     <tr>
-                        <td colspan="2"></td>
+                        <td colspan="3"></td>
                         <td colspan="2">SUBTOTAL</td>
                         <td>₹ {{ sub_total }}</td>
                     </tr>
                     <tr>
-                        <td colspan="2"></td>
+                        <td colspan="3"></td>
                         <td colspan="2">SGST {{ tax_data.s_gst }}%</td>
                         <td>₹ {{ s_gst_value }}</td>
                     </tr>
                     <tr>
-                        <td colspan="2"></td>
+                        <td colspan="3"></td>
                         <td colspan="2">CGST {{ tax_data.c_gst }}%</td>
                         <td>₹ {{ c_gst_value }}</td>
                     </tr>
                     <tr>
-                        <td colspan="2"></td>
+                        <td colspan="3"></td>
                         <td colspan="2">OTHER</td>
                         <td>₹ {{ tax_data.other_charges }}</td>
                     </tr>
                     <tr>
-                        <td colspan="2"></td>
+                        <td colspan="3"></td>
                         <td colspan="2">GRAND TOTAL</td>
                         <td>₹ {{ grand_total }}</td>
                     </tr>

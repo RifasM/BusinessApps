@@ -1,3 +1,4 @@
+import datetime
 import json
 import re
 
@@ -52,9 +53,13 @@ def process_request(request):
     :return: Processed initial_data and data
     """
     initial_data = request.POST["initial_data"]
-    if not re.search("'datetime.date\\((.*?)\\)'", initial_data):
+    if re.search("datetime.date\\((.*?)\\)", initial_data):
         date_val = re.search("datetime.date\\((.*?)\\)", initial_data).group(1)
-        initial_data = re.sub("datetime.date\\((.*?)\\)", "'datetime.date(" + date_val + ")'", initial_data)
+        dates = list(map(int, date_val.split(", ")))
+        print(dates)
+        initial_data = re.sub("datetime.date\\((.*?)\\)",
+                              "'" + datetime.date(dates[0], dates[1], dates[2]).strftime("%d %B, %Y") + "'",
+                              initial_data)
     initial_data = json.loads(initial_data.replace("'", "\""))
 
     old_data = json.loads(request.POST["prev_data"].replace("'", "\"")) if "prev_data" in request.POST else None
@@ -179,11 +184,22 @@ def save(request):
     initial_data, data = process_request(request)
     tax_data = json.loads(request.POST["tax_data"].replace("'", "\""))
     sub_total = request.POST["sub_total"]
-    s_gst = request.POST["s_gst"]
-    s_gst_val = float(sub_total) * (float(s_gst) / 100)
-    c_gst = request.POST["c_gst"]
-    c_gst_val = float(sub_total) * (float(c_gst) / 100)
+    s_gst_val = float(sub_total) * (float(tax_data.get("s_gst")) / 100)
+    c_gst_val = float(sub_total) * (float(tax_data.get("c_gst")) / 100)
     grand_total = request.POST["grand_total"]
+
+    return render(request,
+                  "invoice/invoice_print.html",
+                  {
+                      "initial_data": initial_data,
+                      "invoice_number": inv_num,
+                      "prev_data": data,
+                      "tax_data": tax_data,
+                      "sub_total": sub_total,
+                      "s_gst_value": s_gst_val,
+                      "c_gst_value": c_gst_val,
+                      "grand_total": grand_total
+                  })
 
 
 def modify(request):
