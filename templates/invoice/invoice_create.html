@@ -1,12 +1,11 @@
-
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="">
 
     <title>BusinessApps</title>
 
@@ -69,7 +68,6 @@
         <h1>M R Interiors</h1>
           <div class="row">
               {% if initial_data %}
-                  {{ initial_data }}
               <div class="col-md-8">
                 <table class="table table-sm table-dark">
                   <tbody>
@@ -143,21 +141,33 @@
             {% elif stage == "2" %}
                 <div class="col-md-5">
                     <a href="javascript:Add()" class="btn btn-outline-info">Add Another Item</a>
-                    <a href="javascript:save()" class="btn btn-outline-info">Save and Print</a>
+                    <a href="javascript:save()" class="btn btn-outline-info">Proceed</a>
                 </div>
                 <script>
-                    function Add(){
+                    function Add() {
                         let form_data = document.getElementById("main-form");
                         form_data.setAttribute("action", "{% url 'invoice:save_add' %}");
                         form_data.submit();
                     }
 
-                    function save(){
+                    function save() {
                         let form_data = document.getElementById("main-form");
-                        form_data.setAttribute("action", "{% url 'invoice:create' %}");
+                        form_data.setAttribute("action", "{% url 'invoice:save_tax' %}");
                         form_data.submit();
                     }
                 </script>
+            {% elif stage == "3" %}
+                {% if error %}
+                    <div class="badge badge-error">
+                        {{ error }}
+                    </div>
+                {% endif %}
+                <script>
+                    form_data = document.getElementById("main-form").setAttribute("action", "{% url 'invoice:save_print' %}");
+                </script>
+                <div class="col-md-5">
+                    <input type="submit" class="btn btn-outline-info" value="Save and Print">
+                </div>
             {% endif %}
         </form>
 

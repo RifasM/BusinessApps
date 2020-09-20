@@ -102,7 +102,8 @@ class InvoiceForm(forms.Form):
             attrs={
                 "class": "form-control",
                 "placeholder": "Invoice Number",
-            })
+            }),
+        required=False
     )
     s_gst = forms.IntegerField(
         widget=forms.NumberInput(
@@ -138,4 +139,14 @@ class InvoiceForm(forms.Form):
                 "placeholder": "Grand Total",
             }),
         required=True
+    )
+    additional_notes = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control",
+                "placeholder": "Additional Notes"
+            }
+        ),
+        required=False,
+        max_length=50
     )
