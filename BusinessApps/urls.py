@@ -20,5 +20,5 @@ from BusinessApps import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", views.index, name="index_page"),
-    path("invoice", include("invoice.urls"), name="invoice")
+    path("invoice/", include("invoice.urls"), name="invoice")
 ]

@@ -1,8 +1,8 @@
 from djongo import models
 
-unit_choices = (("Sq. Mtr", "sq_mtr"),
-                ("Sq. Ft", "sq_ft"),
-                ("Unit(s)", "unit"))
+unit_choices = (("sq_mtr", "Sq. Mtr"),
+                ("sq_ft", "Sq. Ft"),
+                ("unit", "Unit(s)"))
 
 
 class Item(models.Model):
@@ -22,7 +22,7 @@ class Item(models.Model):
                             choices=unit_choices)
     unit_price = models.IntegerField(help_text="Unit Price of Item",
                                      blank=False)
-    total_cost = models.IntegerField(default=quantity * unit_price,
+    total_cost = models.IntegerField(help_text="Total",
                                      blank=False)
 
     class Meta:
@@ -47,8 +47,8 @@ class Invoice(models.Model):
     reference_number = models.CharField(max_length=30,
                                         help_text="Enter Reference Number/PO",
                                         blank=False)
-    reference_dated = models.DateField(help_text="PO/Order Date",
-                                       blank=False)
+    reference_date = models.DateField(help_text="PO/Order Date",
+                                      blank=False)
     addressed_to = models.CharField(max_length=300,
                                     help_text="Invoice Addressed To",
                                     blank=False)

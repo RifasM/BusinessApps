@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from invoice.forms import InvoiceForm
 
 
 def landing(request):
@@ -18,7 +19,11 @@ def create(request):
     :param request: User Request (Get and Post)
     :return: Creation Page on GET, Display Invoice on POST
     """
-    pass
+    return render(request,
+                  "invoice/invoice_create.html",
+                  {
+                      "form": InvoiceForm()
+                  })
 
 
 def modify(request):

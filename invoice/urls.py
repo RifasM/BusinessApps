@@ -5,6 +5,6 @@ app_name = "invoice"
 
 urlpatterns = [
     path("", views.landing, name="landing_page"),
-    path("create", views.create, name="create"),
-    path("modify", views.modify, name="modify"),
+    path("create/", views.create, name="create"),
+    path("modify/", views.modify, name="modify"),
 ]
