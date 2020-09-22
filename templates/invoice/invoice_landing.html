@@ -86,7 +86,7 @@
     <!--Main layout-->
     <div class="container">
         <h3 class="text-info text-center mb-5">Choose an Option</h3>
-        <div class="row h-100">
+        <div class="row">
             <div class="col-md-4">
                 <a type="button" href="{% url 'invoice:create' %}" class="btn btn-success btn-lg btn-block">Create New
                     Invoice</a>
@@ -97,6 +97,40 @@
             </div>
             <div class="col-md-4">
                 <a type="button" href="#" class="btn btn-danger btn-lg btn-block">Delete Invoice</a>
+            </div>
+        </div>
+
+        <hr class="extra-margins">
+
+        <h3 class="text-danger text-center mb-5">Recent Invoices</h3>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-sm table-light">
+                    <thead>
+                    <tr>
+                        <th scope="col">Invoice Number</th>
+                        <th scope="col">Invoice Date</th>
+                        <th scope="col">Created At</th>
+                        <th scope="col">Updated At</th>
+                        <th scope="col">Reference Number</th>
+                        <th scope="col">Reference Dated</th>
+                        <th scope="col">Grand Total</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for inv in invoices %}
+                        <tr>
+                            <td>{{ inv.number }}</td>
+                            <td>{{ inv.invoice_date }}</td>
+                            <td>{{ inv.created_at }}</td>
+                            <td>{{ inv.modified_at }}</td>
+                            <td>{{ inv.reference_number }}</td>
+                            <td>{{ inv.reference_date }}</td>
+                            <td>{{ inv.total }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

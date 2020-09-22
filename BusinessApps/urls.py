@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+
 from BusinessApps import views
 
 urlpatterns = [
@@ -22,3 +23,6 @@ urlpatterns = [
     path("", views.index, name="index_page"),
     path("invoice/", include("invoice.urls"), name="invoice")
 ]
+
+handler404 = views.handler404
+handler500 = views.handler500

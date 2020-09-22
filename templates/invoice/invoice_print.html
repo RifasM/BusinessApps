@@ -180,6 +180,7 @@
     <div class="toolbar hidden-print">
         <div class="text-right">
             <button id="printInvoice" class="btn btn-info"><i class="fa fa-print"></i> Print</button>
+            <a href="{% url 'index_page' %}" class="btn btn-info"><i class="fa fa-print"></i> Home</a>
             <!--button class="btn btn-info"><i class="fa fa-file-pdf-o"></i> Export as PDF</button-->
         </div>
         <hr>
@@ -245,7 +246,7 @@
                             <td class="qty">{{ d.quantity }}</td>
                             <td class="unit">{{ d.unit }}</td>
                             <td class="qty">{{ d.unit_price }}</td>
-                            <td class="total">₹ {{ d.total }}</td>
+                            <td class="total">₹ {{ d.total_cost }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>

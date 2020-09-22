@@ -18,3 +18,12 @@ def create_quotation(request):
     :return: Creation Page on GET, Display Quotation on POST
     """
     pass
+
+
+def handler404(request, exception):
+    print(">>> 404: ", exception)
+    return render(request, '404.html', status=404)
+
+
+def handler500(request):
+    return render(request, '500.html', status=500)

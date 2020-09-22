@@ -126,7 +126,7 @@
 
         <div class="row">
             {% if prev_data %}
-                <table class="table table-sm table-dark">
+                <table class="table table-sm table-light">
                     <thead>
                     <tr>
                         <th scope="col">Item Number</th>
@@ -136,21 +136,21 @@
                         <th scope="col">Unit</th>
                         <th scope="col">Price</th>
                         <th scope="col">Total</th>
-                </tr>
-              </thead>
-              <tbody>
-              {% for d in prev_data %}
-                <tr>
-                  <th scope="row">{{ forloop.counter }}</th>
-                  <td>{{ d.short_description }}</td>
-                  <td>{{ d.particulars }}</td>
-                  <td>{{ d.quantity }}</td>
-                  <td>{{ d.unit }}</td>
-                  <td>{{ d.unit_price }}</td>
-                  <td>{{ d.total }}</td>
-                </tr>
-              {% endfor %}
-              </tbody>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for d in prev_data %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ d.short_description }}</td>
+                            <td>{{ d.particulars }}</td>
+                            <td>{{ d.quantity }}</td>
+                            <td>{{ d.unit }}</td>
+                            <td>{{ d.unit_price }}</td>
+                            <td>{{ d.total_cost }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
                 </table>
             {% endif %}
         </div>

@@ -15,15 +15,15 @@ class Item(models.Model):
     particulars = models.TextField(max_length=3000,
                                    help_text="Item Particulars",
                                    blank=False)
-    quantity = models.IntegerField(help_text="Quantity of Item",
-                                   blank=False)
+    quantity = models.FloatField(help_text="Quantity of Item",
+                                 blank=False)
     unit = models.CharField(max_length=5,
                             help_text="Unit of Item",
                             choices=unit_choices)
-    unit_price = models.IntegerField(help_text="Unit Price of Item",
-                                     blank=False)
-    total_cost = models.IntegerField(help_text="Total",
-                                     blank=False)
+    unit_price = models.FloatField(help_text="Unit Price of Item",
+                                   blank=False)
+    total_cost = models.FloatField(help_text="Total",
+                                   blank=False)
 
     class Meta:
         abstract = True
@@ -62,12 +62,12 @@ class Invoice(models.Model):
                              blank=True,
                              help_text="Additional Notes")
     items = models.ArrayField(model_container=Item)
-    s_gst = models.IntegerField(help_text="S_GST Percentage",
-                                default=9)
-    c_gst = models.IntegerField(help_text="C_GST Percentage",
-                                default=9)
-    other_charges = models.IntegerField(help_text="Other Charges as needed")
-    total = models.IntegerField(help_text="Invoice Total")
+    s_gst = models.FloatField(help_text="S_GST Percentage",
+                              default=9)
+    c_gst = models.FloatField(help_text="C_GST Percentage",
+                              default=9)
+    other_charges = models.FloatField(help_text="Other Charges as needed")
+    total = models.FloatField(help_text="Invoice Total")
 
     class Meta:
         ordering = ["number"]

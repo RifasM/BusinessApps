@@ -16,7 +16,14 @@ def landing(request):
     :param request: User Request (Get and Post)
     :return: Creation Page on GET, Display Invoice on POST
     """
-    return render(request, "invoice/invoice_landing.html")
+
+    data = Invoice.objects.all().order_by("-number")[:10]
+
+    return render(request,
+                  "invoice/invoice_landing.html",
+                  {
+                      "invoices": data
+                  })
 
 
 def create(request):
@@ -74,7 +81,7 @@ def process_request(request):
             "quantity": request.POST["quantity"],
             "unit": request.POST["unit"],
             "unit_price": request.POST["unit_price"],
-            "total": str(float(request.POST["quantity"]) * float(request.POST["unit_price"]))
+            "total_cost": str(float(request.POST["quantity"]) * float(request.POST["unit_price"]))
         })
     except MultiValueDictKeyError:
         data = old_data
@@ -139,7 +146,7 @@ def save_print(request):
             if inv_num is None:
                 inv_num = 1
             else:
-                inv_num += 1
+                inv_num = inv_num.number + 1
 
         elif request.POST["invoice_number"] != "" \
                 and \
@@ -157,11 +164,11 @@ def save_print(request):
         else:
             inv_num = request.POST["invoice_number"]
 
-        sub_total = sum([float(a.get("total")) for a in data])
-        grand_total = sub_total + ((float(request.POST["s_gst"]) +
-                                    float(request.POST["c_gst"])) / 100) * sub_total
+        sub_total = sum([float(a.get("total_cost")) for a in data])
+        grand_total = sub_total + float(tax_data.get("other_charges")) + \
+                      ((float(request.POST["s_gst"]) +
+                        float(request.POST["c_gst"])) / 100) * sub_total
 
-        print(initial_data, type(initial_data))
         return render(request,
                       "invoice/invoice_preview.html",
                       {
@@ -187,6 +194,22 @@ def save(request):
     s_gst_val = float(sub_total) * (float(tax_data.get("s_gst")) / 100)
     c_gst_val = float(sub_total) * (float(tax_data.get("c_gst")) / 100)
     grand_total = request.POST["grand_total"]
+
+    Invoice.objects.create(number=inv_num,
+                           invoice_date=datetime.datetime.strptime(initial_data.get("invoice_date"), "%d %B, %Y"),
+                           reference_number=initial_data.get("reference_number"),
+                           reference_date=datetime.datetime.strptime(initial_data.get("reference_date"), "%d %B, %Y"),
+                           addressed_to=initial_data.get("addressed_to"),
+                           party_gst=initial_data.get("party_gst"),
+                           created_at=datetime.datetime.now(),
+                           modified_at=datetime.datetime.now(),
+                           notes=tax_data.get("additional_notes"),
+                           items=data,
+                           s_gst=tax_data.get("s_gst"),
+                           c_gst=tax_data.get("c_gst"),
+                           other_charges=tax_data.get("other_charges"),
+                           total=grand_total
+                           ).save()
 
     return render(request,
                   "invoice/invoice_print.html",
