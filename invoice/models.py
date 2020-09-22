@@ -43,7 +43,8 @@ class Invoice(models.Model):
     number = models.AutoField(primary_key=True,
                               help_text="Invoice Number",
                               blank=False)
-    invoice_date = models.DateField(auto_now_add=True)
+    invoice_date = models.DateField(help_text="Invoice Date",
+                                    blank=False)
     reference_number = models.CharField(max_length=30,
                                         help_text="Enter Reference Number/PO",
                                         blank=False)

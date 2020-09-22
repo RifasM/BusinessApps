@@ -5,9 +5,10 @@ from invoice.models import unit_choices
 
 class InitialInvoice(forms.Form):
     invoice_date = forms.DateField(
-        widget=forms.SelectDateWidget(
+        widget=forms.TextInput(
             attrs={
-                "class": "form-control"
+                "class": "form-control",
+                "placeholder": "Invoice Date"
             }
         ),
         required=True
@@ -21,9 +22,10 @@ class InitialInvoice(forms.Form):
         required=True
     )
     reference_date = forms.DateField(
-        widget=forms.SelectDateWidget(
+        widget=forms.TextInput(
             attrs={
-                "class": "form-control"
+                "class": "form-control",
+                "placeholder": "Reference Date"
             }
         ),
         required=True
