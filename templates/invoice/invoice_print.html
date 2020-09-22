@@ -211,7 +211,7 @@
                 <div class="row contacts">
                     <div class="col invoice-to">
                         <div class="text-gray-light">INVOICE TO:</div>
-                        <div class="address">{{ initial_data.addressed_to }}</div>
+                        <div class="address">{{ initial_data.addressed_to|safe }}</div>
                         <div class="address">PARTY GSTIN: {{ initial_data.party_gst }}</div>
                     </div>
                     <div class="col invoice-details">
@@ -240,7 +240,7 @@
                                 {{ d.short_description }}
                             </h3>
                                 <br>
-                                {{ d.particulars }}
+                                {{ d.particulars|safe }}
                             </td>
                             <td class="qty">{{ d.quantity }}</td>
                             <td class="unit">{{ d.unit }}</td>
@@ -285,7 +285,7 @@
                 </div>
             </main>
             <footer>
-                Invoice was created on a computer and is valid without the signature and seal.
+                This is a computer generated Invoice and is valid without the signature and seal.
             </footer>
         </div>
         <div></div>

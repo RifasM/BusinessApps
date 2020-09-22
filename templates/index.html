@@ -1,100 +1,146 @@
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="/favicon.ico">
-
-    <title>BusinessApps</title>
-
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Business Apps</title>
+    <!-- Font Awesome -->
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
-          crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css"
+          rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/css/mdb.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.0.10/font-awesome-animation.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="shortcut icon" href="https://mdbootstrap.com/wp-content/themes/mdbootstrap4/favicon.ico">
+
     <style>
-        body {
-          padding-top: 5rem;
+        /* TEMPLATE STYLES */
+
+        main {
+            padding-top: 3rem;
+            padding-bottom: 2rem;
+            min-height: 100vh;
         }
-        .center-text {
-          padding: 3rem 1.5rem;
-          text-align: center;
+
+        .extra-margins {
+            margin-top: 1rem;
+            margin-bottom: 2.5rem;
         }
     </style>
-  </head>
 
-  <body>
 
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+</head>
 
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-            <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-      </div>
+<body>
+
+<!--Main Navigation-->
+<header>
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark info-color-dark">
+        <a class="navbar-brand" href="#"><strong>M R Interiors</strong></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'index_page' %}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'invoice:landing_page' %}">Invoice</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Quotation</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin">Admin Page</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav nav-flex-icons">
+                <li class="nav-item">
+                    <a class="nav-link"><i class="fa fa-facebook"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"><i class="fa fa-twitter"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"><i class="fa fa-instagram"></i></a>
+                </li>
+            </ul>
+        </div>
     </nav>
 
-    <main role="main" class="container">
+</header>
+<!--Main Navigation-->
 
-      <div class="center-text">
-        <h1>M R Interiors</h1>
-          <div class="row">
-              <a href="{% url 'invoice:landing_page' %}">
-              <div class="col-md-4">
-                  <h3 class="lead">Invoice</h3>
-              </div>
-              </a>
+<main>
 
-              <a href="">
-              <div class="col-md-4">
-                  <h3 class="lead">Quotation</h3>
-              </div>
-              </a>
-          </div>
-      </div>
+    <!--Main layout-->
+    <div class="container">
+        <h3 class="text-info text-center mb-5">Choose an Option</h3>
+        <div class="row h-100">
+            <div class="col-md-4">
+                <a type="button" href="{% url 'invoice:landing_page' %}" class="btn btn-warning btn-lg btn-block">Invoice</a>
+            </div>
+            <div class="col-md-4">
+                <a type="button" href="#" class="btn btn-primary btn-lg btn-block">Quotation</a>
+            </div>
+            <div class="col-md-4">
+                <a type="button" href="#" class="btn btn-secondary btn-lg btn-block">Letter Head</a>
+            </div>
+        </div>
+    </div>
+    <!--/.Main layout-->
 
-    </main><!-- /.container -->
+</main>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-            integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-            crossorigin="anonymous"></script>
-  </body>
+<!--Footer-->
+<footer class="page-footer info-color-dark center-on-small-only">
+
+    <!--Footer Links-->
+    <div class="container">
+        <div class="row">
+
+            <!--First column-->
+            <div class="col-md-6">
+                <h5 class="title">Copyright</h5> &copy; 2020 <a href="https://rifasm.github.io"> M R Interiors</a>
+                <p>
+                    Built with <i style="color:red;" class="fa fa-heart faa-pulse animated"></i> by <a
+                        href="https://rifasm.github.io">PingIO</a><br>
+                </p>
+            </div>
+            <!--/.First column-->
+        </div>
+    </div>
+    <!--/.Footer Links-->
+
+
+</footer>
+<!--/.Footer-->
+
+
+<!-- SCRIPTS -->
+<!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/js/mdb.min.js"></script>
+
+<script>
+    wow = new WOW().init();
+</script>
+</body>
+
 </html>

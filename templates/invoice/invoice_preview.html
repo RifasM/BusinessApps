@@ -1,195 +1,253 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title><!doctype html>
-        <html lang="en">
-        <head>
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-            <meta name="description" content="">
-            <meta name="author" content="">
-            <link rel="icon" href="">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Business Apps</title>
+    <!-- Font Awesome -->
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css"
+          rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/css/mdb.min.css" rel="stylesheet">
 
-            <title>BusinessApps</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.0.10/font-awesome-animation.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-            <!-- Bootstrap core CSS -->
-            <link rel="stylesheet"
-                  href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-                  integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
-                  crossorigin="anonymous">
+    <link rel="shortcut icon" href="https://mdbootstrap.com/wp-content/themes/mdbootstrap4/favicon.ico">
 
-            <!-- Custom styles for this template -->
-            <style>
-                body {
-                    padding-top: 5rem;
-                }
+    <style>
+        /* TEMPLATE STYLES */
 
-                .center-text {
-                    padding: 3rem 1.5rem;
-                    text-align: center;
-                }
-            </style>
-        </head>
+        main {
+            padding-top: 3rem;
+            padding-bottom: 2rem;
+            min-height: 100vh;
+        }
+
+        .extra-margins {
+            margin-top: 1rem;
+            margin-bottom: 2.5rem;
+        }
+    </style>
+
+
+</head>
 
 <body>
 
-<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<!--Main Navigation-->
+<header>
 
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown01">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-    </div>
-</nav>
 
-<main role="main" class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark info-color-dark">
+        <a class="navbar-brand" href="#"><strong>M R Interiors</strong></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'index_page' %}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'invoice:landing_page' %}">Invoice</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Quotation</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin">Admin Page</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav nav-flex-icons">
+                <li class="nav-item">
+                    <a class="nav-link"><i class="fa fa-facebook"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"><i class="fa fa-twitter"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"><i class="fa fa-instagram"></i></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-    <div class="center-text">
-        <h1>Invoice Number: {{ invoice_number }}</h1>
+</header>
+<!--Main Navigation-->
+
+<main>
+
+    <!--Main layout-->
+    <div class="container">
+        <!--First row-->
         <div class="row">
-            <div class="col-md-8">
-                <table class="table table-sm table-dark">
-                    <tbody>
-                    <tr>
-                        <th scope="row">Invoice Date</th>
-                        <td>{{ initial_data.invoice_date }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Reference Number</th>
-                        <td>{{ initial_data.reference_number }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Reference Date</th>
-                        <td>{{ initial_data.reference_date }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Addressed To</th>
-                        <td>{{ initial_data.addressed_to }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Party GST</th>
-                        <td>{{ initial_data.party_gst }}</td>
-                    </tr>
-                    </tbody>
-                </table>
+            <div class="col-md-12">
+                <!--Featured image -->
+                <div class="view overlay hm-white-light z-depth-1-half">
+                    {% if initial_data %}
+                        <hr class="extra-margins">
+                        <div class="row" style="padding-left: 5%;">
+                            {% if invoice_number %}
+                                <div class="md-form col-md-6">
+                                    <h6><strong>Invoice Number</strong>: {{ invoice_number }}</h6>
+                                </div>
+                            {% endif %}
+                            <div class="md-form col-md-6">
+                                <h6><strong>Invoice Date</strong>: {{ initial_data.invoice_date }}</h6>
+                            </div>
+
+                            <div class="md-form col-md-6">
+                                <h6><strong>Reference Number</strong>: {{ initial_data.reference_number }}</h6>
+                            </div>
+
+                            <div class="md-form col-md-6">
+                                <h6><strong>Reference Date</strong>: {{ initial_data.reference_date }}</h6>
+                            </div>
+
+                            <div class="md-form col-md-6">
+                                <h6><strong>Addressed To</strong>:</h6>
+                                <p>{{ initial_data.addressed_to }}</p>
+                            </div>
+
+                            <div class="md-form col-md-6">
+                                <h6><strong>Party GST</strong>:</h6>
+                                <p>{{ initial_data.party_gst }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="mask">
+                    </div>
+                </div>
+                <br>
             </div>
         </div>
-    </div>
+        <!--/.First row-->
 
-    <div class="center-text">
-        <table class="table table-sm table-dark">
-            <thead>
-            <tr>
-                <th scope="col">Item Number</th>
-                <th scope="col">Short Description</th>
-                <th scope="col">Description</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Unit</th>
-                <th scope="col">Price</th>
-                <th scope="col">Total</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for d in prev_data %}
-                <tr>
-                    <th scope="row">{{ forloop.counter }}</th>
-                    <td>{{ d.short_description }}</td>
-                    <td>{{ d.particulars }}</td>
-                    <td>{{ d.quantity }}</td>
-                    <td>{{ d.unit }}</td>
-                    <td>{{ d.unit_price }}</td>
-                    <td>{{ d.total }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
+        <div class="row">
+            {% if prev_data %}
+                <table class="table table-sm table-light">
+                    <thead>
+                    <tr>
+                        <th scope="col">Item Number</th>
+                        <th scope="col">Short Description</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Unit</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for d in prev_data %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ d.short_description }}</td>
+                            <td>{{ d.particulars }}</td>
+                            <td>{{ d.quantity }}</td>
+                            <td>{{ d.unit }}</td>
+                            <td>{{ d.unit_price }}</td>
+                            <td>{{ d.total }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
 
-    <div class="center-text">
-        <table>
-            <tbody>
-            <tr>
-                <th scope="row">Total</th>
-                <td>{{ sub_total }}</td>
-            </tr>
-            <tr>
-                <th scope="row">SGST %</th>
-                <td>{{ tax_data.s_gst }}</td>
-            </tr>
-            <tr>
-                <th scope="row">CGST %</th>
-                <td>{{ tax_data.c_gst }}</td>
-            </tr>
-            <tr>
-                <th scope="row">Other Charges</th>
-                <td>{{ tax_data.other_charges }}</td>
-            </tr>
-            <tr>
-                <th scope="row">Grand Total</th>
-                <td>{{ grand_total }}</td>
-            </tr>
-            <tr>
-                <th scope="row">Notes</th>
-                <td>{{ tax_data.additional_notes }}</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+        <div class="row h-100">
+            <div class="col-md-3"></div>
+            <div class="col-md-6" style="padding-left: 5%;">
+                <div class="md-form col-md-6">
+                    <h6><strong>Total</strong>: {{ sub_total }}</h6>
+                </div>
 
-    <div class="text-center">
-        <form method="post" action="{% url 'invoice:save' %}">
-            {% csrf_token %}
-            <input type="hidden" value="{{ invoice_number }}" name="invoice_number">
-            <input type="hidden" value="{{ initial_data }}" name="initial_data">
-            <input type="hidden" value="{{ prev_data }}" name="prev_data">
-            <input type="hidden" value="{{ tax_data }}" name="tax_data">
-            <input type="hidden" value="{{ sub_total }}" name="sub_total">
+                <div class="md-form col-md-6">
+                    <h6><strong>SGST %</strong>: {{ tax_data.s_gst }}</h6>
+                </div>
+
+                <div class="md-form col-md-6">
+                    <h6><strong>CGST %</strong>: {{ tax_data.c_gst }}</h6>
+                </div>
+
+                <div class="md-form col-md-6">
+                    <h6><strong>Other Charges</strong>: {{ tax_data.other_charges }}</h6>
+                </div>
+
+                <div class="md-form col-md-6">
+                    <h6><strong>Grand Total</strong>: {{ grand_total }}</h6>
+                </div>
+
+                <div class="md-form col-md-6">
+                    <h6><strong>Additional Notes</strong>: {{ tax_data.additional_notes }}</h6>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+
+        <div class="text-center">
+            <form method="post" action="{% url 'invoice:save' %}">
+                {% csrf_token %}
+                <input type="hidden" value="{{ invoice_number }}" name="invoice_number">
+                <input type="hidden" value="{{ initial_data }}" name="initial_data">
+                <input type="hidden" value="{{ prev_data }}" name="prev_data">
+                <input type="hidden" value="{{ tax_data }}" name="tax_data">
+                <input type="hidden" value="{{ sub_total }}" name="sub_total">
             <input type="hidden" value="{{ grand_total }}" name="grand_total">
 
-            <input type="submit" class="btn btn-outline-success" value="Save and Print">
-        </form>
+                <input type="submit" class="btn btn-outline-success" value="Save and Print">
+            </form>
+        </div>
+
     </div>
+    <!--/.Main layout-->
 
-</main><!-- /.container -->
+</main>
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-        crossorigin="anonymous"></script>
+<!--Footer-->
+<footer class="page-footer info-color-dark center-on-small-only">
+
+    <!--Footer Links-->
+    <div class="container">
+        <div class="row">
+
+            <!--First column-->
+            <div class="col-md-6">
+                <h5 class="title">Copyright</h5> &copy; 2020 <a href="https://rifasm.github.io"> M R Interiors</a>
+                <p>
+                    Built with <i style="color:red;" class="fa fa-heart faa-pulse animated"></i> by <a
+                        href="https://rifasm.github.io">PingIO</a><br>
+                </p>
+            </div>
+            <!--/.First column-->
+        </div>
+    </div>
+    <!--/.Footer Links-->
+
+
+</footer>
+<!--/.Footer-->
+
+
+<!-- SCRIPTS -->
+<!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/js/mdb.min.js"></script>
+
+<script>
+    wow = new WOW().init();
+</script>
 </body>
+
 </html>

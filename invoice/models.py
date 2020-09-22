@@ -12,7 +12,7 @@ class Item(models.Model):
     short_description = models.CharField(max_length=30,
                                          help_text="Short Description",
                                          blank=False)
-    particulars = models.CharField(max_length=3000,
+    particulars = models.TextField(max_length=3000,
                                    help_text="Item Particulars",
                                    blank=False)
     quantity = models.IntegerField(help_text="Quantity of Item",
@@ -50,7 +50,7 @@ class Invoice(models.Model):
                                         blank=False)
     reference_date = models.DateField(help_text="PO/Order Date",
                                       blank=False)
-    addressed_to = models.CharField(max_length=300,
+    addressed_to = models.TextField(max_length=300,
                                     help_text="Invoice Addressed To",
                                     blank=False)
     party_gst = models.CharField(max_length=15,
@@ -58,7 +58,7 @@ class Invoice(models.Model):
                                  blank=True)
     created_at = models.DateTimeField(auto_created=True, editable=False)
     modified_at = models.DateField(auto_now_add=True)
-    notes = models.CharField(max_length=1000,
+    notes = models.TextField(max_length=1000,
                              blank=True,
                              help_text="Additional Notes")
     items = models.ArrayField(model_container=Item)
