@@ -212,14 +212,14 @@
                 <div class="row contacts">
                     <div class="col invoice-to">
                         <div class="text-gray-light">INVOICE TO:</div>
-                        <div class="address">{{ initial_data.addressed_to|safe }}</div>
-                        <div class="address">PARTY GSTIN: {{ initial_data.party_gst }}</div>
+                        <div class="address">{{ data.addressed_to|safe }}</div>
+                        <div class="address">PARTY GSTIN: {{ data.party_gst }}</div>
                     </div>
                     <div class="col invoice-details">
-                        <h1 class="invoice-id">INVOICE {{ invoice_number }}</h1>
-                        <div class="date">Date of Invoice: {{ initial_data.invoice_date }}</div>
-                        <div class="date">Reference Number/PO: {{ initial_data.reference_number }}</div>
-                        <div class="date">Reference Dated: {{ initial_data.reference_date }}</div>
+                        <h1 class="invoice-id">INVOICE {{ data.number }}</h1>
+                        <div class="date">Date of Invoice: {{ data.invoice_date }}</div>
+                        <div class="date">Reference Number/PO: {{ data.reference_number }}</div>
+                        <div class="date">Reference Dated: {{ data.reference_date }}</div>
                     </div>
                 </div>
                 <table border="0" cellspacing="0" cellpadding="0">
@@ -234,7 +234,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for d in prev_data %}
+                    {% for d in data.items %}
                         <tr>
                             <td class="no">{{ forloop.counter }}</td>
                             <td class="text-left"><h3>
@@ -269,12 +269,12 @@
                     <tr>
                         <td colspan="3"></td>
                         <td colspan="2">OTHER</td>
-                        <td>₹ {{ tax_data.other_charges }}</td>
+                        <td>₹ {{ data.other_charges }}</td>
                     </tr>
                     <tr>
                         <td colspan="3"></td>
                         <td colspan="2">GRAND TOTAL</td>
-                        <td>₹ {{ grand_total }}</td>
+                        <td>₹ {{ data.total }}</td>
                     </tr>
                     </tfoot>
                 </table>
@@ -282,7 +282,7 @@
                 <div class="notices">
                     <div>NOTICE:</div>
                     <div class="notice">A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>
-                    <div class="notice">{{ tax_data.additional_notes }}</div>
+                    <div class="notice">{{ data.additional_notes }}</div>
                 </div>
             </main>
             <footer>

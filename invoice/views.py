@@ -2,7 +2,7 @@ import datetime
 import json
 import re
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.utils.datastructures import MultiValueDictKeyError
 
 from invoice.forms import InvoiceForm, InitialInvoice, ItemForm
@@ -191,8 +191,6 @@ def save(request):
     initial_data, data = process_request(request)
     tax_data = json.loads(request.POST["tax_data"].replace("'", "\""))
     sub_total = request.POST["sub_total"]
-    s_gst_val = float(sub_total) * (float(tax_data.get("s_gst")) / 100)
-    c_gst_val = float(sub_total) * (float(tax_data.get("c_gst")) / 100)
     grand_total = request.POST["grand_total"]
 
     Invoice.objects.create(number=inv_num,
@@ -211,17 +209,30 @@ def save(request):
                            total=grand_total
                            ).save()
 
+    return redirect("print/" + inv_num)
+
+
+def print_invoice(request, invoice_number):
+    """
+    Return the invoice print page for given invoice number
+    :param request: User request(GET)
+    :param invoice_number: Required invoice number to print
+    :return: Rendered Invoice Page
+    """
+
+    data = Invoice.objects.get(number=invoice_number)
+
+    sub_total = sum([a.get("total_cost") for a in data.items])
+    s_gst_val = float(sub_total) * (float(data.s_gst) / 100)
+    c_gst_val = float(sub_total) * (float(data.c_gst) / 100)
+
     return render(request,
                   "invoice/invoice_print.html",
                   {
-                      "initial_data": initial_data,
-                      "invoice_number": inv_num,
-                      "prev_data": data,
-                      "tax_data": tax_data,
+                      "data": data,
                       "sub_total": sub_total,
                       "s_gst_value": s_gst_val,
-                      "c_gst_value": c_gst_val,
-                      "grand_total": grand_total
+                      "c_gst_value": c_gst_val
                   })
 
 
