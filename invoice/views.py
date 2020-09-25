@@ -141,7 +141,7 @@ def save_print(request):
         }
 
         if request.POST["invoice_number"] == "":
-            inv_num = Invoice.objects.order_by("number").first()
+            inv_num = Invoice.objects.order_by("-number").first()
 
             if inv_num is None:
                 inv_num = 1
@@ -209,7 +209,7 @@ def save(request):
                            total=grand_total
                            ).save()
 
-    return redirect("print/" + inv_num)
+    return redirect("/invoice/print/" + inv_num)
 
 
 def print_invoice(request, invoice_number):
