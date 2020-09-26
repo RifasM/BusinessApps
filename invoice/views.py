@@ -245,15 +245,15 @@ def modify(request, invoice_number):
     """
     if request.method == "POST":
         n = Invoice.objects.filter(number=request.POST["invoice_number"])
-        items = n.get("items")
+        items = n.get().items
 
         for i, item in enumerate(items):
-            item.short_description = request.POST[str(i) + "_short"]
-            item.particulars = request.POST[str(i) + "_particular"]
-            item.quantity = request.POST[str(i) + "_quantity"]
-            item.unit = request.POST[str(i) + "_unit"]
-            item.unit_price = request.POST[str(i) + "_unit_price"]
-            item.total_cost = request.POST[str(i) + "_total_cost"]
+            item["short_description"] = request.POST[str(i + 1) + "_short_description"]
+            item["particulars"] = request.POST[str(i + 1) + "_particulars"]
+            item["quantity"] = request.POST[str(i + 1) + "_quantity"]
+            item["unit"] = request.POST[str(i + 1) + "_unit"]
+            item["unit_price"] = request.POST[str(i + 1) + "_unit_price"]
+            item["total_cost"] = request.POST[str(i + 1) + "_total_cost"]
 
         n.update(
             number=request.POST["invoice_number"],
@@ -261,14 +261,13 @@ def modify(request, invoice_number):
             reference_number=request.POST["reference_number"],
             reference_date=request.POST["reference_date"],
             addressed_to=request.POST["addressed_to"],
-            part_gst=request.POST["part_gst"],
+            party_gst=request.POST["party_gst"],
             items=items,
             c_gst=request.POST["c_gst"],
             s_gst=request.POST["s_gst"],
             other_charges=request.POST["other_charges"],
-            additional_notes=request.POST["additional_notes"],
-            total=request.POST["total"],
             notes=request.POST["additional_notes"],
+            total=request.POST["total"],
             modified_at=datetime.datetime.now()
         )
         return redirect("index_page")
@@ -283,3 +282,12 @@ def modify(request, invoice_number):
                       "invoice": data,
                       "sub_total": sub_total
                   })
+
+
+def modify_page(request):
+    """
+    Render Modification Page
+    :param request: User Request (GET)
+    :return: Modification Page
+    """
+    pass
