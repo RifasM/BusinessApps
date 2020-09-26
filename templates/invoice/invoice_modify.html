@@ -89,7 +89,7 @@
             <div class="col-md-2"></div>
             <div class="col-md-8">
                 <p class="h5 text-center mb-4">Modify Invoice</p>
-                <form class="row" id="main-form" method="post" action="{% url 'invoice:modify' %}">
+                <form class="row" id="main-form" method="post" action="{% url 'invoice:modify' invoice.number %}">
                     {% csrf_token %}
 
                     <label for="invoice_number">Invoice Number</label>
@@ -177,22 +177,26 @@
                     <input placeholder="Grand Total" id="total" type="number" name="total"
                            value="">
 
+                    <label for="additional_notes">Notes</label>
+                    <input placeholder="Notes" id="additional_notes" type="text" name="additional_notes"
+                           value="{{ invoice.additiona_notes }}">
+
                     <script>
-                        let sgst = document.getElementById("s_gst").value;
-                        let cgst = document.getElementById("c_gst").value;
+                        let sgst = parseFloat(document.getElementById("s_gst").value);
+                        let cgst = parseFloat(document.getElementById("c_gst").value);
 
-                        let total = document.getElementById("sub_total").value;
+                        let total = parseFloat(document.getElementById("sub_total").value);
 
-                        let other = document.getElementById("other_charges").value;
+                        let other = parseFloat(document.getElementById("other_charges").value);
 
-                        sgst = document.getElementById("s_gst_value").value = total * sgst;
-                        cgst = document.getElementById("c_gst_value").value = total * cgst;
+                        sgst = document.getElementById("s_gst_value").value = total * sgst / 100;
+                        cgst = document.getElementById("c_gst_value").value = total * cgst / 100;
 
                         document.getElementById("total").value = total + sgst + cgst + other
                     </script>
 
 
-                    <input type="submit" class="btn btn-outline-info" value="Preview">
+                    <input type="submit" class="btn btn-outline-info" value="Modify">
                 </form>
             </div>
             <div class="col-md-2"></div>

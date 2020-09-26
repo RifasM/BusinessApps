@@ -236,11 +236,21 @@ def print_invoice(request, invoice_number):
                   })
 
 
-def modify(request):
+def modify(request, invoice_number):
     """
     Return and process Requests involving
     Modification of Invoices
+    :param invoice_number: Invoice Number to modify
     :param request: User Request (Get and Post)
     :return: Modification Page on GET, Display Invoice on POST
     """
-    pass
+    data = Invoice.objects.get(number=invoice_number)
+
+    sub_total = sum([a.get("total_cost") for a in data.items])
+
+    return render(request,
+                  "invoice/invoice_modify.html",
+                  {
+                      "invoice": data,
+                      "sub_total": sub_total
+                  })

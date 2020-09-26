@@ -12,5 +12,5 @@ urlpatterns = [
     path("savePrint/", views.save_print, name="save_print"),
     path("save/", views.save, name="save"),
     path("print/<invoice_number>", views.print_invoice, name="print_inv"),
-    path("modify/", views.modify, name="modify"),
+    path("modify/<invoice_number>", views.modify, name="modify"),
 ]
