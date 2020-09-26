@@ -190,7 +190,6 @@ def save(request):
     inv_num = request.POST["invoice_number"]
     initial_data, data = process_request(request)
     tax_data = json.loads(request.POST["tax_data"].replace("'", "\""))
-    sub_total = request.POST["sub_total"]
     grand_total = request.POST["grand_total"]
 
     Invoice.objects.create(number=inv_num,
