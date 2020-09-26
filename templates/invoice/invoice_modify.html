@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Modify Invoice - {{ invoice.invoice_number }}</title>
+    <!-- Font Awesome -->
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css"
+          rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/css/mdb.min.css" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.0.10/font-awesome-animation.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="shortcut icon" href="https://mdbootstrap.com/wp-content/themes/mdbootstrap4/favicon.ico">
+
+    <style>
+        /* TEMPLATE STYLES */
+
+        main {
+            padding-top: 3rem;
+            padding-bottom: 2rem;
+            min-height: 100vh;
+        }
+
+        .extra-margins {
+            margin-top: 1rem;
+            margin-bottom: 2.5rem;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+<!--Main Navigation-->
+<header>
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark info-color-dark">
+        <a class="navbar-brand" href="#"><strong>M R Interiors</strong></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'index_page' %}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'invoice:landing_page' %}">Invoice</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Quotation</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin">Admin Page</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav nav-flex-icons">
+                <li class="nav-item">
+                    <a class="nav-link"><i class="fa fa-facebook"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"><i class="fa fa-twitter"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"><i class="fa fa-instagram"></i></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+</header>
+<!--Main Navigation-->
+
+<main>
+
+    <!--Main layout-->
+    <div class="container">
+        <div class="row h-100">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <p class="h5 text-center mb-4">Modify Invoice</p>
+                <form class="row" id="main-form" method="post" action="{% url 'invoice:modify' %}">
+                    {% csrf_token %}
+
+                    <label for="invoice_number">Invoice Number</label>
+                    <input placeholder="Invoice Number" id="invoice_number" type="number" name="invoice_number"
+                           value="{{ invoice.invoice_number }}">
+
+                    <label for="invoice_date">Invoice Date</label>
+                    <input placeholder="Invoice Date" id="invoice_date" type="date" name="invoice_date"
+                           value="{{ invoice.invoice_date }}">
+
+                    <label for="reference_number">Reference Number</label>
+                    <input placeholder="Reference Number" id="reference_number" type="text" name="reference_number"
+                           value="{{ invoice.reference_number }}">
+
+                    <label for="reference_date">Reference Date</label>
+                    <input placeholder="Reference Date" id="reference_date" type="date" name="reference_date"
+                           value="{{ invoice.reference_date }}">
+
+                    <label for="addressed_to">Addressed To</label>
+                    <input placeholder="Addressed To" id="addressed_to" type="text" name="addressed_to"
+                           value="{{ invoice.addressed_to }}">
+
+                    <label for="party_gst">Party GST</label>
+                    <input placeholder="Party GST" id="party_gst" type="text" name="party_gst"
+                           value="{{ invoice.party_gst }}">
+
+                    <div class="row">
+
+                        {% for d in invoice.items %}
+                            <div class="col-md-8">
+                                <p>Item: {{ forloop.counter }}</p>
+
+                                <label for="{{ forloop.counter }}_short">Short Description</label>
+                                <input placeholder="Short Description" id="{{ forloop.counter }}_short" type="text"
+                                       name="{{ forloop.counter }}_short_description" value="{{ d.short_description }}">
+
+                                <label for="{{ forloop.counter }}_particular">Description</label>
+                                <input placeholder="Description" id="{{ forloop.counter }}_particular" type="text"
+                                       name="{{ forloop.counter }}_particulars" value="{{ d.particulars }}">
+
+                                <label for="{{ forloop.counter }}_quantity">Quantity</label>
+                                <input placeholder="Quantity" id="{{ forloop.counter }}_quantity" type="text"
+                                       name="{{ forloop.counter }}_quantity" value="{{ d.quantity }}">
+
+                                <label for="{{ forloop.counter }}_unit">Unit</label>
+                                <input placeholder="Unit" id="{{ forloop.counter }}_unit" type="text"
+                                       name="{{ forloop.counter }}_unit" value="{{ d.unit }}">
+
+                                <label for="{{ forloop.counter }}_unit_price">Unit Price</label>
+                                <input placeholder="Unit Price" id="{{ forloop.counter }}_unit_price" type="text"
+                                       name="{{ forloop.counter }}_unit_price" value="{{ d.unit_price }}">
+
+                                <label for="{{ forloop.counter }}_total_cost">Total Cost</label>
+                                <input placeholder="Total Cost" id="{{ forloop.counter }}_total_cost" type="number"
+                                       name="{{ forloop.counter }}_total_cost" value="{{ d.total_cost }}">
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <label for="sub_total">Sub Total</label>
+                    <input placeholder="Sub Total" id="sub_total" type="number" name="sub_total"
+                           value="{{ sub_total }}">
+
+
+                    <input type="submit" class="btn btn-outline-info" value="Preview">
+                </form>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+
+
+    </div>
+    <!--/.Main layout-->
+
+</main>
+
+<!--Footer-->
+<footer class="page-footer info-color-dark center-on-small-only">
+
+    <!--Footer Links-->
+    <div class="container">
+        <div class="row">
+
+            <!--First column-->
+            <div class="col-md-6">
+                <h5 class="title">Copyright</h5> &copy; 2020 <a href="https://rifasm.github.io"> M R Interiors</a>
+                <p>
+                    Built with <i style="color:red;" class="fa fa-heart faa-pulse animated"></i> by <a
+                        href="https://rifasm.github.io">PingIO</a><br>
+                </p>
+            </div>
+            <!--/.First column-->
+        </div>
+    </div>
+    <!--/.Footer Links-->
+
+
+</footer>
+<!--/.Footer-->
+
+
+<!-- SCRIPTS -->
+<!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/js/mdb.min.js"></script>
+
+<script>
+    wow = new WOW().init();
+</script>
+</body>
+
+</html>
