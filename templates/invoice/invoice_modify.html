@@ -132,6 +132,7 @@
 
                                 <label for="{{ forloop.counter }}_quantity">Quantity</label>
                                 <input placeholder="Quantity" id="{{ forloop.counter }}_quantity" type="number"
+                                       step="any"
                                        name="{{ forloop.counter }}_quantity" value="{{ d.quantity }}">
 
                                 <label for="{{ forloop.counter }}_unit">Unit</label>
@@ -140,17 +141,19 @@
 
                                 <label for="{{ forloop.counter }}_unit_price">Unit Price</label>
                                 <input placeholder="Unit Price" id="{{ forloop.counter }}_unit_price" type="number"
+                                       step="any"
                                        name="{{ forloop.counter }}_unit_price" value="{{ d.unit_price }}">
 
                                 <label for="{{ forloop.counter }}_total_cost">Total Cost</label>
                                 <input placeholder="Total Cost" id="{{ forloop.counter }}_total_cost" type="number"
+                                       step="any"
                                        name="{{ forloop.counter }}_total_cost" value="{{ d.total_cost }}">
                             </div>
                         {% endfor %}
                     </div>
 
                     <label for="sub_total">Sub Total</label>
-                    <input placeholder="Sub Total" id="sub_total" type="number" name="sub_total"
+                    <input placeholder="Sub Total" id="sub_total" type="number" name="sub_total" step="any"
                            value="{{ sub_total }}">
 
                     <label for="c_gst">CGST %</label>
@@ -158,7 +161,7 @@
                            value="{{ invoice.c_gst }}">
 
                     <label for="c_gst_value">CGST Value</label>
-                    <input placeholder="CGST Value" id="c_gst_value" type="number" name="c_gst_value"
+                    <input placeholder="CGST Value" id="c_gst_value" type="number" name="c_gst_value" step="any"
                            value="">
 
                     <label for="s_gst">SGST %</label>
@@ -166,20 +169,20 @@
                            value="{{ invoice.s_gst }}">
 
                     <label for="s_gst_value">SGST Value</label>
-                    <input placeholder="SGST Value" id="s_gst_value" type="number" name="s_gst_value"
+                    <input placeholder="SGST Value" id="s_gst_value" type="number" step="any" name="s_gst_value"
                            value="">
 
                     <label for="other_charges">Other Charges</label>
-                    <input placeholder="Other Charges" id="other_charges" type="number" name="other_charges"
+                    <input placeholder="Other Charges" id="other_charges" type="number" step="any" name="other_charges"
                            value="{{ invoice.other_charges }}">
 
                     <label for="total">Grand Total</label>
-                    <input placeholder="Grand Total" id="total" type="number" name="total"
+                    <input placeholder="Grand Total" id="total" type="number" name="total" step="any"
                            value="">
 
                     <label for="additional_notes">Notes</label>
                     <input placeholder="Notes" id="additional_notes" type="text" name="additional_notes"
-                           value="{{ invoice.additiona_notes }}">
+                           value="{{ invoice.notes }}">
 
                     <script>
                         let sgst = parseFloat(document.getElementById("s_gst").value);
