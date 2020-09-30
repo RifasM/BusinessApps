@@ -120,7 +120,7 @@
                     <tbody>
                     {% for inv in invoices %}
                         <tr>
-                            <td>{{ inv.number }}</td>
+                            <td><a href="{% url 'invoice:modify' inv.number %}"> {{ inv.number }} </a></td>
                             <td>{{ inv.invoice_date }}</td>
                             <td>{{ inv.created_at }}</td>
                             <td>{{ inv.modified_at }}</td>
