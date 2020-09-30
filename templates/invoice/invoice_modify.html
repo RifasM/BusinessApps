@@ -125,33 +125,49 @@
 
                         {% for d in invoice.items %}
                             <div class="col-md-8">
-                                <p>Item: {{ forloop.counter }}</p>
+                                <p class="mt-3">Item: {{ forloop.counter }}</p>
 
                                 <label for="{{ forloop.counter }}_short">Short Description</label>
                                 <input class="mb-3" placeholder="Short Description" id="{{ forloop.counter }}_short"
                                        type="text"
                                        name="{{ forloop.counter }}_short_description" value="{{ d.short_description }}">
 
-                                <label for="{{ forloop.counter }}_particular">Description</label>
-                                <input class="mb-3" placeholder="Description" id="{{ forloop.counter }}_particular"
-                                       type="text"
-                                       name="{{ forloop.counter }}_particulars" value="{{ d.particulars }}">
+                                <table class="table table-light">
+                                    <tr>
+                                        <td>
+                                            <label for="{{ forloop.counter }}_particular">Description</label>
+                                            <input class="mb-3" placeholder="Description"
+                                                   id="{{ forloop.counter }}_particular"
+                                                   type="text"
+                                                   name="{{ forloop.counter }}_particulars" value="{{ d.particulars }}">
+                                        </td>
+                                        <td>
+                                            <label for="{{ forloop.counter }}_quantity">Quantity</label>
+                                            <input class="mb-3" placeholder="Quantity"
+                                                   id="{{ forloop.counter }}_quantity"
+                                                   type="number"
+                                                   step="any"
+                                                   name="{{ forloop.counter }}_quantity" value="{{ d.quantity }}">
+                                        </td>
+                                    </tr>
 
-                                <label for="{{ forloop.counter }}_quantity">Quantity</label>
-                                <input class="mb-3" placeholder="Quantity" id="{{ forloop.counter }}_quantity"
-                                       type="number"
-                                       step="any"
-                                       name="{{ forloop.counter }}_quantity" value="{{ d.quantity }}">
-
-                                <label for="{{ forloop.counter }}_unit">Unit</label>
-                                <input class="mb-3" placeholder="Unit" id="{{ forloop.counter }}_unit" type="text"
-                                       name="{{ forloop.counter }}_unit" value="{{ d.unit }}">
-
-                                <label for="{{ forloop.counter }}_unit_price">Unit Price</label>
-                                <input class="mb-3" placeholder="Unit Price" id="{{ forloop.counter }}_unit_price"
-                                       type="number"
-                                       step="any"
-                                       name="{{ forloop.counter }}_unit_price" value="{{ d.unit_price }}">
+                                    <tr>
+                                        <td>
+                                            <label for="{{ forloop.counter }}_unit">Unit</label>
+                                            <input class="mb-3" placeholder="Unit" id="{{ forloop.counter }}_unit"
+                                                   type="text"
+                                                   name="{{ forloop.counter }}_unit" value="{{ d.unit }}">
+                                        </td>
+                                        <td>
+                                            <label for="{{ forloop.counter }}_unit_price">Unit Price</label>
+                                            <input class="mb-3" placeholder="Unit Price"
+                                                   id="{{ forloop.counter }}_unit_price"
+                                                   type="number"
+                                                   step="any"
+                                                   name="{{ forloop.counter }}_unit_price" value="{{ d.unit_price }}">
+                                        </td>
+                                    </tr>
+                                </table>
 
                                 <label for="{{ forloop.counter }}_total_cost">Total Cost</label>
                                 <input class="mb-3" placeholder="Total Cost" id="{{ forloop.counter }}_total_cost"
