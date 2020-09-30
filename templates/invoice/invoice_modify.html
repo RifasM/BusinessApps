@@ -184,23 +184,37 @@
                                step="any"
                                value="{{ sub_total }}">
 
-                        <label for="c_gst">CGST %</label>
-                        <input class="mb-3" placeholder="CGST %" id="c_gst" type="number" name="c_gst"
-                               value="{{ invoice.c_gst }}">
+                        <table class="table table-light">
+                            <tr>
+                                <td>
+                                    <label for="c_gst">CGST %</label>
+                                    <input class="mb-3" placeholder="CGST %" id="c_gst" type="number" name="c_gst"
+                                           value="{{ invoice.c_gst }}">
+                                </td>
+                                <td>
+                                    <label for="c_gst_value">CGST Value</label>
+                                    <input class="mb-3" placeholder="CGST Value" id="c_gst_value" type="number"
+                                           name="c_gst_value"
+                                           step="any"
+                                           value="">
+                                </td>
+                            </tr>
 
-                        <label for="c_gst_value">CGST Value</label>
-                        <input class="mb-3" placeholder="CGST Value" id="c_gst_value" type="number" name="c_gst_value"
-                               step="any"
-                               value="">
-
-                        <label for="s_gst">SGST %</label>
-                        <input class="mb-3" placeholder="SGST %" id="s_gst" type="number" name="s_gst"
-                               value="{{ invoice.s_gst }}">
-
-                        <label for="s_gst_value">SGST Value</label>
-                        <input class="mb-3" placeholder="SGST Value" id="s_gst_value" type="number" step="any"
-                               name="s_gst_value"
-                               value="">
+                            <tr>
+                                <td>
+                                    <label for="s_gst">SGST %</label>
+                                    <input class="mb-3" placeholder="SGST %" id="s_gst" type="number" name="s_gst"
+                                           value="{{ invoice.s_gst }}">
+                                </td>
+                                <td>
+                                    <label for="s_gst_value">SGST Value</label>
+                                    <input class="mb-3" placeholder="SGST Value" id="s_gst_value" type="number"
+                                           step="any"
+                                           name="s_gst_value"
+                                           value="">
+                                </td>
+                            </tr>
+                        </table>
 
                         <label for="other_charges">Other Charges</label>
                         <input class="mb-3" placeholder="Other Charges" id="other_charges" type="number" step="any"
