@@ -113,8 +113,8 @@
                                value="{{ invoice.reference_date|date:"Y-m-d" }}">
 
                         <label for="addressed_to">Addressed To</label>
-                        <input class="mb-3" placeholder="Addressed To" id="addressed_to" type="text" name="addressed_to"
-                               value="{{ invoice.addressed_to }}">
+                        <textarea class="mb-3 md-textarea" placeholder="Addressed To" id="addressed_to" type="text"
+                                  name="addressed_to">{{ invoice.addressed_to }}</textarea>
 
                         <label for="party_gst">Party GST</label>
                         <input class="mb-3" placeholder="Party GST" id="party_gst" type="text" name="party_gst"
@@ -136,10 +136,10 @@
                                     <tr>
                                         <td>
                                             <label for="{{ forloop.counter }}_particular">Description</label>
-                                            <input class="mb-3" placeholder="Description"
-                                                   id="{{ forloop.counter }}_particular"
-                                                   type="text"
-                                                   name="{{ forloop.counter }}_particulars" value="{{ d.particulars }}">
+                                            <textarea class="mb-3 md-textarea" placeholder="Description"
+                                                      id="{{ forloop.counter }}_particular"
+                                                      type="text"
+                                                      name="{{ forloop.counter }}_particulars">{{ d.particulars }}</textarea>
                                         </td>
                                         <td>
                                             <label for="{{ forloop.counter }}_quantity">Quantity</label>
