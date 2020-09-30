@@ -225,6 +225,8 @@ def print_invoice(request, invoice_number):
     s_gst_val = float(sub_total) * (float(data.s_gst) / 100)
     c_gst_val = float(sub_total) * (float(data.c_gst) / 100)
 
+    data.addressed_to = data.addressed_to.replace("\n", "<br>")
+
     return render(request,
                   "invoice/invoice_print.html",
                   {

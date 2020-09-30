@@ -33,7 +33,7 @@ class InitialInvoice(forms.Form):
     addressed_to = forms.CharField(
         widget=forms.Textarea(
             attrs={
-                "class": "form-control",
+                "class": "form-control md-textarea",
                 "placeholder": "Party Address"
             }
         ),
@@ -63,7 +63,7 @@ class ItemForm(forms.Form):
     particulars = forms.CharField(
         widget=forms.Textarea(
             attrs={
-                "class": "form-control",
+                "class": "form-control md-textarea",
                 "placeholder": "Particulars"
             }
         ),

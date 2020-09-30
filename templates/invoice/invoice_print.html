@@ -214,7 +214,7 @@
                     <div class="col invoice-to">
                         <div class="text-gray-light">INVOICE TO:</div>
                         <div class="address">{{ data.addressed_to|safe }}</div>
-                        <div class="address">PARTY GSTIN: {{ data.party_gst }}</div>
+                        <div class="address">PARTY GSTIN: {{ data.party_gst|upper }}</div>
                     </div>
                     <div class="col invoice-details">
                         <h1 class="invoice-id">INVOICE {{ data.number }}</h1>
